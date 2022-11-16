@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-mysql
+  template:
+    metadata:
+      labels:
+        app: deployment-mysql
+    spec:
+      containers:
+      - name: deployment-mysql
+        image: mysql:latest
+        env:
+        - name: "MYSQL_USER"
+          value: "user"
+        - name: "MYSQL_PASSWORD"
+          value: "password"
+        - name: "MYSQL_DATABASE"
+          value: "sample"
+        - name: "MYSQL_ROOT_PASSWORD"
+          value: "supersecret"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3306
+        
+
